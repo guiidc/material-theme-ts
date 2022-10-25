@@ -1,41 +1,38 @@
-import { createTheme } from '@mui/material/styles'
-import { PaletteColor, PaletteColorOptions } from '@mui/material'
+import { createTheme, PaletteColorOptions } from '@mui/material'
 
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: string
-    }
-  }
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    status?: {
-      danger?: string
-    }
-  }
-
-  interface Palette {
-    green: PaletteColor
-  }
-
+declare module '@mui/material' {
   interface PaletteOptions {
-    blue?: PaletteColorOptions
-    red?: PaletteColorOptions
-    orange?: PaletteColorOptions
-    green: PaletteColorOptions
+    blue: PaletteColorOptions
+    red: PaletteColorOptions
+    orange: PaletteColorOptions
   }
-  // interface PaletteOptions {
-  //   green: PaletteColor
-  // }
 }
 
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
-    green: true
+    blue: true
+    red: true
+    orange: true
+  }
+
+  interface ButtonPropsVariantOverrides {
+    bordered: true
   }
 }
 
 const theme = createTheme({
+  components: {
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: 'bordered' },
+          style: {
+            padding: '15px'
+          }
+        }
+      ]
+    }
+  },
   palette: {
     primary: {
       light: '#33A0EB',
@@ -49,11 +46,20 @@ const theme = createTheme({
       dark: '#3C3C3C',
       contrastText: '#FFF'
     },
-    green: {
-      dark: '#8f9a27',
-      main: '#cddc39',
-      light: '##d7e36',
-      contrastText: ''
+    blue: {
+      main: '#42569A',
+      dark: '#213888',
+      contrastText: '#FFF'
+    },
+    red: {
+      main: '#ba3333',
+      dark: '#822323',
+      light: '#c75b5b'
+    },
+    orange: {
+      main: '#ff9800',
+      dark: '#b26a00',
+      light: '#ffac33'
     }
   }
 })
